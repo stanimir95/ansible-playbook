@@ -1,0 +1,51 @@
+---                                                             
+- hosts: all
+  become: true
+  tasks:
+  
+  - name: Install keys
+    apt_key:
+      keyserver: keys.gnupg.net
+      id: E1F958385BFE2B6E
+
+  - apt_repository:
+      repo: deb http://packages.x2go.org/debian stretch extras main
+
+  - apt_repository:
+      repo: deb-src http://packages.x2go.org/debian stretch extras main
+
+  - name: NoMachine Install
+    command: dpkg -i nomachine_6.7.6_11_amd64.deb
+  
+  - name: Install packages
+    apt:                                                         
+      name: "{{ packages }}"
+    vars:                                                        
+      packages: 
+      - x2go-keyring      
+      - wget                                                     
+      - vim                                                      
+      - git
+      - curl 
+      - xfce4
+      - xfce4-goodies
+      - firefox-esr
+      - libreoffice
+      - kate
+      - openjdk-8-jre
+      - sudo
+      - strace
+      - terminator
+      - patch
+      - git
+      - zip
+      - unzip
+      - pbzip2
+      - xfce4-goodies
+      - xfce4-xkb-plugin
+      - whois
+      - cifs-utils
+      - evince
+      - x2goserver
+      - x2goserver-xsession
+      - software-properties-common
